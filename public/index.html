@@ -74,6 +74,14 @@
                 <input type="text" name="search-input" id="search-input"
                     class="bg-transparent rounded-xl border border-slate-500 text-slate-500">
             </div>
+            <div class="flex items-center justify-between mb-6">
+                <label for="sort-products" class="text-slate-500 text-xl font-bold">Sort</label>
+                <select name="sort-products" id="sort-products" class="bg-transparent text-slate-400 rounded-xl">
+                    <option class="bg-slate-500 text-slate-300" value="">select a category</option>
+                    <option class="bg-slate-500 text-slate-300" selected value="newest">newst</option>
+                    <option class="bg-slate-500 text-slate-300" value="pldest">oldest</option>
+                </select>
+            </div>
             <div id="products-list">
                 <!-- <div class="flex items-center justify-between mb-8">
                     <span class="text-slate-400">React.js</span>
