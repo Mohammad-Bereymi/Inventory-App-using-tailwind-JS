@@ -4,10 +4,12 @@ const addNewProductBtn = document.querySelector("#add-new-product");
 const productTitle = document.querySelector("#product-title");
 const productQuantity = document.querySelector("#product-quantity");
 const selectedCategory = document.querySelector("#product-category");
+const searchInput = document.querySelector("#search-input");
 
 class ProductView {
   constructor() {
     addNewProductBtn.addEventListener("click", (e) => this.addNewProduct(e));
+    searchInput.addEventListener("input", (e) => this.searchProducts(e));
     this.products = [];
   }
   setApp() {
@@ -23,15 +25,15 @@ class ProductView {
 
     Storage.saveProducts({ title, quantity, category });
     this.products = Storage.getAllProducts();
-    this.createProductList();
+    this.createProductList(this.products);
     productTitle.value = "";
     productQuantity.value = "";
     selectedCategory.value = "";
   }
-  createProductList() {
+  createProductList(products) {
     const productsDOM = document.getElementById("products-list");
     let result = "";
-    this.products.forEach((item) => {
+    products.forEach((item) => {
       const selectedCategory = Storage.getAllCategories().find(
         (c) => c.id == item.category
       );
@@ -57,6 +59,13 @@ class ProductView {
     </div>`;
     });
     productsDOM.innerHTML = result;
+  }
+  searchProducts(e) {
+    const value = e.target.value.trim().toLowerCase();
+    const filteredProducts = this.products.filter((p) => {
+      return p.title.toLowerCase().includes(value);
+    });
+    this.createProductList(filteredProducts);
   }
 }
 

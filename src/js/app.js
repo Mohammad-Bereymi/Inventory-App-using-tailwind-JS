@@ -8,5 +8,5 @@ document.addEventListener("DOMContentLoaded", () => {
   ProductView.setApp();
   console.log(ProductView);
 
-  ProductView.createProductList();
+  ProductView.createProductList(ProductView.products);
 });
