@@ -3,19 +3,19 @@ const products = [
     id: 1,
     title: "React.js",
     category: "frontend",
-    updated: "2022-10-31T15:02:00.411Z",
+    createdAt: "2022-10-31T15:02:00.411Z",
   },
   {
     id: 2,
     title: "Node.js",
     category: "backend",
-    updated: "2022-10-31T15:03:23.556Z",
+    createdAt: "2022-10-31T15:03:23.556Z",
   },
   {
     id: 3,
     title: "Vue.js",
     category: "frontend",
-    updated: "2022-11-01T10:47:26.411Z",
+    createdAt: "2022-11-01T10:47:26.411Z",
   },
 ];
 
@@ -46,7 +46,6 @@ export default class Storage {
     });
     return sortedCategories;
   }
-
   static saveCategory(categoryToSave) {
     const savedCategories = Storage.getAllCategories();
     //edit=>...save
@@ -63,5 +62,31 @@ export default class Storage {
       savedCategories.push(categoryToSave);
     }
     localStorage.setItem("category", JSON.stringify(savedCategories));
+  }
+
+  static getAllProducts() {
+    const savedProducts = JSON.parse(localStorage.getItem("products")) || [];
+    //sort=>Descending
+    return savedProducts.sort((a, b) => {
+      return new Date(a.createdAt) > new Date(b.createdAt) ? -1 : 1;
+    });
+  }
+  static saveProducts(productToSave) {
+    const savedProducts = Storage.getAllProducts();
+    //edit=>...save
+    //new=>..save
+    const existedItem = savedProducts.find((c) => c.id == productToSave.id);
+    if (existedItem) {
+      //edit
+      existedItem.title = productToSave.title;
+      existedItem.quantity = productToSave.quantity;
+      existedItem.category = productToSave.category;
+    } else {
+      //new
+      productToSave.id = new Date().getTime();
+      productToSave.createdAt = new Date().toISOString();
+      savedProducts.push(productToSave);
+    }
+    localStorage.setItem("category", JSON.stringify(savedProducts));
   }
 }
