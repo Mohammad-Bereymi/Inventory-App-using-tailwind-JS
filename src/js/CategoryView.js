@@ -1,7 +1,7 @@
 import Storage from "./Storage.js";
 
-const title = document.querySelector("#category-title");
-const description = document.querySelector("#category-description");
+const categoryTitle = document.querySelector("#category-title");
+const categoryDescription = document.querySelector("#category-description");
 const addNewCategoryBtn = document.querySelector("#add-new-category");
 
 class CategoryView {
@@ -11,19 +11,21 @@ class CategoryView {
   }
   addNewCategory(e) {
     e.preventDefault();
-    const title = title.value;
-    const description = description.value;
+    const title = categoryTitle.value;
+    const description = categoryDescription.value;
     if (!title || !description) return;
     Storage.saveCategory({ title, description });
     this.categories = Storage.getAllCategories();
-    this.createCategoriesList(this.categories);
+    this.createCategoriesList();
+    categoryDescription.value = "";
+    categoryTitle.value = "";
   }
   setApp() {
     this.categories = Storage.getAllCategories();
   }
-  createCategoriesList(categories) {
+  createCategoriesList() {
     let result = `<option class="bg-slate-500 text-slate-400" value="">select a category</option>`;
-    categories.forEach((element) => {
+    this.categories.forEach((element) => {
       result += `<option class="bg-slate-500 text-slate-400" value=${element.id}>${element.title}</option>`;
     });
     const categoryDOM = document.getElementById("product-category");
