@@ -35,7 +35,7 @@
                     </div>
                     <div class="flex items-center justify-center gap-x-5">
                         <button class="flex-1 border border-slate-400 text-slate-400 rounded-xl py-2">Cancel</button>
-                        <button class="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2">Add New
+                        <button id="add-new-category" class="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2">Add New
                             Category</button>
                     </div>
                 </form>
@@ -58,9 +58,7 @@
                         <label for="product-category" class="block mb-1 text-slate-400">category</label>
                         <select name="product-category" id="product-category"
                             class="bg-transparent text-slate-400 rounded-xl w-full">
-                            <option class="bg-slate-500 text-slate-400" value="">select a category</option>
-                            <option class="bg-slate-500 text-slate-400" value="backend">backend</option>
-                            <option class="bg-slate-500 text-slate-400" value="frontend">backend</option>
+
                         </select>
                     </div>
                     <div class="flex items-center justify-center gap-x-5">
@@ -85,7 +83,7 @@
             <div class="h-20"></div>
         </div>
     </div>
-    <script src="/src/js/app.js"></script>
+    <script src="/src/js/app.js" type="module"></script>
 </body>
 
 </html>
