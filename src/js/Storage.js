@@ -92,4 +92,9 @@ export default class Storage {
     }
     localStorage.setItem("products", JSON.stringify(savedProducts));
   }
+  static deleteProduct(id) {
+    const savedProducts = Storage.getAllProducts();
+    const filteredProducts = savedProducts.filter((p) => p.id != id);
+    localStorage.setItem("products", JSON.stringify(filteredProducts));
+  }
 }
